@@ -34,7 +34,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Our server is running on port ${port}`);
 });
-const mainRoutes = require('./app/routes/index');
-app.use('/api/', mainRoutes);
-const auth = require('./app/routes/auth');
-app.use(auth);
+require('./app/routes/auth')(app);
+require('./app/routes/index')(app);
