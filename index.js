@@ -3,13 +3,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 
-const mainRoutes = require('./app/routes/index');
 
 // set up dependencies
 const app = express();
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 app.use(logger('dev'));
+var corsOptions = {
+  origin: "http://localhost:5053"
+};
+
 
 // set up mongoose
 const uri = "mongodb://localhost:27017/system_report"
@@ -31,4 +34,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Our server is running on port ${port}`);
 });
+const mainRoutes = require('./app/routes/index');
 app.use('/api/', mainRoutes);
+const auth = require('./app/routes/auth');
+app.use(auth);
