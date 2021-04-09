@@ -1,12 +1,12 @@
 var express = require('express');
+const app = express();
+const path = require('path');
 var { createCustomer,
     listCustomer,
     updateCustomer,
     deleteCustomer } =  require('../controller/UserController');
-
-var login = require('../controller/LoginController');
-
 const router = express.Router();
+app.use(express.static(path.join(__dirname, 'views')));
 
 router.post('/register', createCustomer);
 
@@ -16,7 +16,8 @@ router.get('/find-users/:user_name', updateCustomer);
 
 router.get('/delete/:email', deleteCustomer);
 
-route.get('/login', login);
-
+router.get('/login', function(req, res){
+    res.sendFile('index.html', { root: '.' });
+});
 
 module.exports = router;
