@@ -1,5 +1,6 @@
 const { authJwt } = require("../middlewares/index");
 const controller = require("../controllers/LoginController");
+const log = require("../controllers/LogController")
 const app = require("express")();
 
 module.exports = function(app) {
@@ -26,4 +27,6 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+
+  app.get("api/log", log);
 };
