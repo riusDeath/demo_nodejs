@@ -6,54 +6,40 @@
     },
     "features" : [
         {
-            "chat": {
-                "parent_id": "root",
+            "parent_id": "root",
                 "name": "chat",
                 "id": "chat"
-            }
         },
         {
-            "report": {
-                "parent_id": "root",
-                "name": "report",
-                "id": "report"
-            }
+            "parent_id": "root",
+            "name": "report",
+            "id": "report"
         }
     ],
     "features_sub" : [
         {
-            "custom_feild": {
             "features_id": "chat",
             "name": "custom_feild",
             "id": "custom_feild"
-            }
         },{
-            "tag": {
-                "features_id": "chat",
-                "name": "tag",
-                "id": "tag"
-            }
+            "features_id": "chat",
+            "name": "tag",
+            "id": "tag"
         },{
-            "message": {
-                "features_id": "chat",
-                "name": "message",
-                "id": "message"
-            }
+            "features_id": "chat",
+            "name": "message",
+            "id": "message"
         }
     ],
     "actions": [
         {
-            "chat_with_customer": {
-                "id": "chat_with_customer",
-                "features_sub_id": ["custom_feild", "message"],
-                "name": "chat_with_customer"
-            }
+            "id": "chat_with_customer",
+            "features_sub_id": ["custom_feild", "message"],
+            "name": "chat_with_customer"
         },{
-            "tag_user": {
-                "id": "tag_user",
-                "features_sub_id": ["custom_feild", "tag"],
-                "name": "tag_user"
-            }
+            "id": "tag_user",
+            "features_sub_id": ["custom_feild", "tag"],
+            "name": "tag_user"
         }
     ]
 }
