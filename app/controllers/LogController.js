@@ -1,52 +1,34 @@
-const express = require("express");
-const path_config = '../models/config.json';
-var mongoose = require('mongoose');
-const log = require('../models/log');
+const db = require('../models/index');
+const path_config = process.cwd()+'/app/models/config.json';
 
 const fs = require('fs');
-const uri = "mongodb://localhost:27017/system_report"
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(()=> {
-    console.log('Database connected');
-  })
-  .catch((error)=> {
-    console.log('Error connecting to database');
-  });
+const Logs = db.logs;
 
+module.exports = function (req) {
+    fs.readFile(path_config, (err, data) => {
+        if (err) throw err;
+        let config = JSON.parse(data);
+        var action = [];
+        for (var key in config.action) {
+            action[key] = config.action[key];
+        }
 
-fs.readFile(path_config, (err, data) => {
-    if (err) throw err;
-    let config = JSON.parse(data);
-    var features = Object.keys(config.features).map(function(key) {
-        return config.features[key];
-      });
-      
-    var features_sub = Object.keys(config.features_sub).map(function(key) {
-        return config.features_sub[key];
-    });
+        const channel_id = action[req.body.action_id].channel_id;
+        const channel_sub_id = action[req.body.action_id].channel_sub_id;
+        const feature_id = action[req.body.action_id].feature_id;
 
-    var actions = Object.keys(config.actions).map(function(key) {
-        return config.actions[key];
-    });
-    features.forEach(feature => {
-        features_sub.forEach(feature_sub => {
-            if (feature_sub.features_id == feature.id) {
-                let Log = new log({
-                    _id: mongoose.Types.ObjectId(),
-                    node_id: feature.id,
-                    action: feature_sub.id,
-                    created_at: Date.now()
-                    });
-                    console.log(Log);
-                Log.save((err, Log) => {
-                    if (err) {
-                      console.log(err)
-                      return;
-                    };
-                });
-            }
+        var Log = new Logs({
+            user_id: req.body.user_id,
+            action_id: req.body.action_id,
+            feature_id: feature_id,
+            channel_sub_id: channel_sub_id,
+            channel_id: channel_id,
+            created_at: Date.now()
         });
-    });
-});
+        Log.save((err, Log) => {
+            console.log(Log)
+        });
+    })
+}
 
 

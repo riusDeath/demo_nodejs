@@ -24,15 +24,26 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log('Error connecting to database');
   });
 
-const port = 5035;
-// set up route
-app.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Welcome to Project with Nodejs and MongoDB',
-  });
-});
-app.listen(port, () => {
-  console.log(`Our server is running on port ${port}`);
-});
 require('./app/routes/auth')(app);
 require('./app/routes/index')(app);
+const cluster = require('cluster');
+if (cluster.isMaster) {
+  var cpuCount = require('os').cpus().length;
+  for (var i = 0; i < cpuCount; i += 1) {
+    cluster.fork();
+  }
+} else {
+  const port = 5035;
+// set up route
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      message: 'Welcome to Project with Nodejs and MongoDB',
+    });
+  });
+  app.listen(port, () => {
+    console.log(`Our server is running on port ${port}`);
+  });
+}
+cluster.on('fork', function(worker) {
+  console.log('forked -> Worker %d', worker.id);
+});

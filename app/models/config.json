@@ -4,42 +4,171 @@
         "name": "chatbot",
         "id": "root"
     },
-    "features" : [
-        {
+    "channel": {
+        "chat": {
             "parent_id": "root",
-                "name": "chat",
-                "id": "chat"
+            "name": "Quản lý hội thoại",
+            "id": "chat"
         },
-        {
+        "audience": {
             "parent_id": "root",
-            "name": "report",
-            "id": "report"
+            "name": "Quản lý khách hàng",
+            "id": "audience"
+        },
+        "broadcasting": {
+            "parent_id": "root",
+            "name": "Quản lý tin nhắn",
+            "id": "broadcasting"
+        },
+        "growth_tool": {
+            "parent_id": "root",
+            "name": "Thu hút khách hàng",
+            "id": "growth_tool"
+        },
+        "automation": {
+            "parent_id": "root",
+            "name": "Quản lý chat bot",
+            "id": "automation"
+        },
+        "flow": {
+            "parent_id": "root",
+            "name": "Quản lý kịch bản",
+            "id": "flow"
         }
-    ],
-    "features_sub" : [
-        {
-            "features_id": "chat",
-            "name": "custom_feild",
-            "id": "custom_feild"
-        },{
-            "features_id": "chat",
-            "name": "tag",
-            "id": "tag"
-        },{
-            "features_id": "chat",
-            "name": "message",
-            "id": "message"
+    },
+
+    "channel_sub" : {
+        "custom_feil": {
+            "name": "Thông tin khách hàng",
+            "id": "custom_feild",
+            "channel_id": "chat"
+        },
+        "tag": {
+            "name": "Gắn thẻ hội thoại",
+            "id": "tag",
+            "channel_id": "chat"
+        },
+        "sequence": {
+            "id": "sequence",
+            "name": "Kịch bản chăm sóc",
+            "channel_id": "chat"
+        },
+        "note": {
+            "id": "note",
+            "name": "Ghi chú",
+            "channel_id": "chat"
+        },
+        "welcome_message": {
+            "id": "welcome_message",
+            "name": "Tin nhắn chào mừng ",
+            "channel_id": "automation"
+        },
+        "default_reply": {
+            "id": "default_reply",
+            "name": "Câu trả lời mặc định",
+            "channel_id": ["automation"]
+        },
+        "main_menu": {
+            "id": "main_menu",
+            "name": "Menu chính",
+            "channel_id": "automation"
+        },
+        "keywords": {
+            "id": "keywords",
+            "name": "Từ khóa",
+            "channel_id": "automation"
+        },
+        "flow": {
+            "id": "flow",
+            "name": "Kịch bản",
+            "channel_id": "automation"
+        },
+        "folder": {
+            "id": "folder",
+            "name": "Thư mục",
+            "channel_id": "automation"
         }
-    ],
-    "actions": [
-        {
+    },
+
+    "feature": {
+        "chat_with_customer": {
             "id": "chat_with_customer",
-            "features_sub_id": ["custom_feild", "message"],
-            "name": "chat_with_customer"
-        },{
-            "id": "tag_user",
-            "features_sub_id": ["custom_feild", "tag"],
-            "name": "tag_user"
+            "name": "Chat với khách hàng",
+            "channel_sub_id": "custom_feil",
+            "channel_id": "chat"
+        },
+        "mark_conversation_as_done": {
+            "id": "mark_conversation_as_done",
+            "name": "Đánh dấu hội thoại đã xử lý",
+            "channel_sub_id": "custom_feil",
+            "channel_id": "chat"
+        },
+        "assign": {
+            "id": "assign",
+            "name": "Chỉ định thành viên trả lời hội thoại",
+            "channel_sub_id": "custom_feil",
+            "channel_id": "chat"
+        },
+        "copy_phone_number": {
+            "id": "copy_phone_number",
+            "name": "Sao chép số điện thoại",
+            "channel_sub_id": {},
+            "channel_id": "chat"
+        },
+        "mark_conversation_as_unread": {
+            "id": "mark_conversation_as_unread",
+            "name": "Chỉ định thành viên trả lời hội thoại.",
+            "channel_sub_id": {},
+            "channel_id": "chat"
+        },
+        "block": {
+            "id": "block",
+            "name": "Chặn khách hàng",
+            "channel_sub_id": {},
+            "channel_id": "chat"
+        },
+        "pause_automation": {
+            "id": "pause_automation",
+            "name": "Bật/ Tắt chế độ Trả lời tự động",
+            "channel_sub_id": {},
+            "channel_id": "chat"
         }
-    ]
+    },
+    "action": {
+        "add_custom_field" : {
+            "id"              : "add_custom_field",
+            "name"            : "Thêm trường thông tin",
+            "channel_sub_id" : "custom_field",
+            "channel_id"     : "chat",
+            "feature_id"     : "chat_with_customer"
+        },
+        "edit_custom_field" : {
+            "id"              : "edit_custom_field",
+            "name"           : "Chỉnh sửa trường thông tin",
+            "channel_sub_id" : "custom_field",
+            "channel_id"     : "chat",
+            "feature_id"     : "chat_with_customer"
+        },
+        "add_tag" : {
+            "id"              : "add_tag",
+            "name"          : "Gắn thẻ khách hàng",
+            "channel_sub_id" : "tags",
+            "channel_id"     : "chat",
+            "feature_id"     : "tag"
+        },
+        "add_new_tag" : {
+            "id"              : "add_new_tag",
+            "name"          : "Gắn thẻ mới",
+            "channel_sub_id" : "tags",
+            "channel_id"     : "chat",
+            "feature_id"     : "tag"
+        },
+        "remove_tag" : {
+            "id"              : "remove_tag",
+            "name"          : "Bỏ gắn thẻ khách hàng",
+            "channel_sub_id" : "tags",
+            "channel_id"     : "chat",
+            "feature_id"     : "tag"
+        }
+    }
 }

@@ -1,7 +1,5 @@
 const { authJwt } = require("../middlewares/index");
 const controller = require("../controllers/LoginController");
-const log = require("../controllers/LogController")
-const app = require("express")();
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -28,5 +26,4 @@ module.exports = function(app) {
     controller.adminBoard
   );
 
-  app.get("api/log", log);
 };
