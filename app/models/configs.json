@@ -1,0 +1,56 @@
+{
+  "root": {
+    "parent_id": "",
+    "name": "chatbot",
+    "id": "root"
+  },
+  "page_type": ["Freemium", "Pro", "Enterprise"],
+  "channel": ["fb", "zl", "web"],
+  "action_type": ["user_click", "system"],
+  "page": {
+    "conversation": {
+      "parent_id": "root",
+      "name": "Quản lý hội thoại",
+      "id": "conversation"
+    }
+  },
+  "feature": {
+    "message": {
+      "id": "message",
+      "name": "Chat với khách hàng",
+      "page_type": "Freemium",
+      "page_id": "conversation"
+    },
+    "tag": {
+      "name": "Gắn thẻ hội thoại",
+      "id": "tag",
+      "page_type": "Freemium",
+      "page_id": "conversation"
+    }
+  },
+  "action": {
+    "add_tag" : {
+      "id"             : "add_tag",
+      "name"           : "Gắn thẻ khách hàng",
+      "page_id"        : "conversation",
+      "action_type"    : "user_click",
+      "feature_id"     : "tag"
+    },
+    "add_new_tag" : {
+      "id"              : "add_new_tag",
+      "name"            : "Gắn thẻ mới",
+      "channel_sub_id"  : "tags",
+      "channel_id"      : "chat",
+      "action_type"     : "user_click",
+      "feature_id"      : "tag"
+    },
+    "remove_tag" : {
+      "id"              : "remove_tag",
+      "name"            : "Bỏ gắn thẻ khách hàng",
+      "channel_sub_id"  : "tags",
+      "channel_id"      : "chat",
+      "action_type"     : "user_click",
+      "feature_id"      : "tag"
+    }
+  }
+}
