@@ -1,4 +1,8 @@
 //Action Generator
+export const actionGeneral = (actionName) => {
+    
+}
+
 export const userActionGenerator = () => {
     return function (dispatch) {
          axios.get(`https://jsonplaceholder.typicode.com/users`)

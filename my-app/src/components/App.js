@@ -1,13 +1,11 @@
 import React from 'react';
-import SearchBar from './SearchBar';
-import UserInformation from './UserInformation';
+import Chat from './Chat'
 import '../style/App.css';
 
 const App = () => {
   return(
     <div className="App">
-      <SearchBar />
-      <UserInformation />
+      <Chat />
     </div>
   )
 }
