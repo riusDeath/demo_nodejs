@@ -2,16 +2,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
-
+const cors = require("cors");
 
 // set up dependencies
 const app = express();
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
+
 app.use(logger('dev'));
 var corsOptions = {
-  origin: "http://localhost:5053"
+  origin: "http://localhost:3000"
 };
+
+app.use(cors(corsOptions))
 
 
 // set up mongoose

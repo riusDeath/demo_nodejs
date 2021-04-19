@@ -1,6 +1,6 @@
 const { verifySignUp } = require("../middlewares/index");
 const controller = require("../controllers/AuthController");
-const logController = require("../controllers/LogController");
+const { readFile, logAction } = require("../controllers/LogController");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -21,5 +21,8 @@ module.exports = function(app) {
   );
 
   app.post("/api/auth/signin", controller.signin);
-  app.post("/api/log", logController);
+
+  app.post("/api/log", readFile);
+
+  app.post("/api/v1/log", logAction);
 };
